@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Haven - Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            max-width: 1200px;
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        /* .login-image {
+            background-image: url('../../assets/login-img.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+            width: 100%;
+        } */
+        .login-form-col {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .login-form {
+            width: 100%;
+            max-width: 400px;
+        }
+        .form-control {
+            padding: 12px;
+        }
+        .btn-login {
+            background-color: #000;
+            color: white;
+            padding: 12px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-login:hover {
+            background-color: #333;
+        }
+        .btn-google {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            color: #757575;
+        }
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            border-top: 1px solid #ddd;
+            z-index: 1;
+        }
+        .divider span {
+            background: white;
+            padding: 0 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+            .login-image {
+                height: 250px;
+                width: 100%;
+            }
+            .login-form-col {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid login-container">
+        <!-- Image Column - Hidden on Small Screens -->
+       <div class="col-md-7 d-none d-md-block p-0 d-flex align-items-center justify-content-center">
+    <img src="../../assets/login-img.jpg" alt="Login Image"
+         style="width: 100%; height: 90vh; object-fit: cover; transform: translateX(-10px); border-radius: 10px;">
+</div>
+
+
+        
+        <!-- Login Form Column -->
+        <div class="col-md-5 login-form-col">
+            <div class="login-form">
+                <div class="text-center mb-4">
+                    <h2>Login to your account</h2>
+                    <p class="text-muted">Log in to your Watch Haven </p>
+                </div>
+                
+                <form>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <a href="#" class="text-dark text-decoration-none">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-login w-100 mb-3">Log In</button>
+                    
+                    <div class="divider">
+                        <span class="text-muted">or</span>
+                    </div>
+                    
+                    <button type="button" class="btn btn-google w-100 mb-3">
+                        <img src="../../assets/google-icon.png"  width="20" class="me-2">
+                        Sign in with Google
+                    </button>
+                    
+                    <div class="text-center mt-3">
+                        Don't have an account? <a href="#" class="text-dark">Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

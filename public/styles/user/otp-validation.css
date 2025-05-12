@@ -1,0 +1,204 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: white;
+            padding: 20px;
+        }
+
+        .otp-container {
+            background-color: #f5efeb;
+            width: 100%;
+            max-width: 450px;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo {
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: #764ba2;
+        }
+
+        .message {
+            background-color: #f0f4ff;
+            color: #4a4a4a;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message i {
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .otp-input-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .otp-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .otp-input.error {
+            border-color: #ff6b6b;
+            animation: shake 0.5s linear;
+        }
+
+        .otp-input.success {
+            border-color: #4ecdc4;
+        }
+
+        .timer {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resend-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .resend-btn:hover {
+            color: #764ba2;
+        }
+
+        .resend-btn:disabled {
+            color: #a0a0a0;
+            cursor: not-allowed;
+        }
+
+        .verify-btn {
+            width: 100%;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .verify-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .verify-btn:disabled {
+            background: #a0a0a0;
+            cursor: not-allowed;
+        }
+
+        .back-to-login {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #667eea;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .back-to-login:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .status-message {
+            margin-top: 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .status-message.success {
+            color: #4ecdc4;
+        }
+
+        .status-message.error {
+            color: #ff6b6b;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .otp-container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .otp-input {
+                width: 40px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }

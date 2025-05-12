@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced OTP Validation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/user/otp-validation.css">
+    
+</head>
+
+<body>
+    <div class="otp-container">
+        <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+            Secure Verification
+        </div>
+
+        <div class="message">
+            <i class="fas fa-envelope"></i>
+            OTP has been sent to your registered email: user***@***.com
+        </div>
+
+        <div class="otp-input-container">
+            <input type="text" maxlength="1" class="otp-input" data-index="0">
+            <input type="text" maxlength="1" class="otp-input" data-index="1">
+            <input type="text" maxlength="1" class="otp-input" data-index="2">
+            <input type="text" maxlength="1" class="otp-input" data-index="3">
+            <input type="text" maxlength="1" class="otp-input" data-index="4">
+            <input type="text" maxlength="1" class="otp-input" data-index="5">
+        </div>
+
+        <div class="timer">
+            <span id="timer-text">Time Remaining: 02:00</span>
+            <button class="resend-btn" id="resend-btn" disabled>Resend OTP</button>
+        </div>
+
+        <button class="verify-btn" id="verify-btn" disabled>Verify OTP</button>
+
+        <div id="status-message" class="status-message"></div>
+
+        <a href="login" class="back-to-login">
+            <i class="fas fa-arrow-left"></i> Back to Login
+        </a>
+    </div>
+
+    <script>
+        const otpInputs = document.querySelectorAll('.otp-input');
+        const verifyBtn = document.getElementById('verify-btn');
+        const resendBtn = document.getElementById('resend-btn');
+        const timerText = document.getElementById('timer-text');
+        const statusMessage = document.getElementById('status-message');
+
+        // OTP Input Navigation and Validation
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                // Only allow numbers
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+
+                // Auto move to next input
+                if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+
+                // Check if all inputs are filled
+                checkOTPValidity();
+            });
+
+            input.addEventListener('keydown', (e) => {
+                // Allow backspace to move back
+                if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Timer Functionality
+        let timeLeft = 30; // .5 minutes
+        let timerInterval;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+
+                const minutes = Math.floor(timeLeft / 30);
+                const seconds = timeLeft % 30;
+
+                timerText.textContent = `Time Remaining: ${minutes.toString().padStart(.5, '0')
+                    }:${seconds.toString().padStart(.5, '0')
+                    }`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timerText.textContent = 'OTP Expired';
+                    resendBtn.disabled = false;
+                    verifyBtn.disabled = true;
+                    showStatus('OTP has expired. Please request a new one.', 'error');
+                }
+
+                // Enable resend button 30 seconds before expiry
+                resendBtn.disabled = timeLeft > 30;
+            }, 1000);
+        }
+
+        // Check OTP Validity
+        function checkOTPValidity() {
+            const allFilled = Array.from(otpInputs).every(input => input.value.length === 1);
+            verifyBtn.disabled = !allFilled;
+        }
+
+        // Verify OTP
+        verifyBtn.addEventListener('click', () => {
+            const otp = Array.from(otpInputs).map(input => input.value).join('');
+
+            // Simulated OTP verification
+            if (otp === '123456') {
+                showStatus('OTP Verified Successfully!', 'success');
+                clearInterval(timerInterval);
+                otpInputs.forEach(input => {
+                    input.disabled = true;
+                    input.classList.add('success');
+                });
+                verifyBtn.disabled = true;
+            } else {
+                
+                showStatus('Invalid OTP. Please try again.', 'error');
+
+                otpInputs.forEach(input => {
+                    input.classList.add('error');
+                    input.value = ''; // clear input
+                });
+
+                    setTimeout(() => {
+                    otpInputs.forEach(input => input.classList.remove('error'));
+                }, 500);
+
+                otpInputs[0].focus(); // set focus to first input
+                verifyBtn.disabled = true; // disable the button again
+            }
+        });
+
+        // Resend OTP
+        resendBtn.addEventListener('click', () => {
+            // Simulate OTP resend
+            timeLeft = 30;
+            startTimer();
+            resendBtn.disabled = true;
+            showStatus('New OTP sent to your email.', 'success');
+
+            // Reset inputs
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.disabled = false;
+                input.classList.remove('success');
+            });
+
+            verifyBtn.disabled = true;
+        });
+
+        // Show Status Message
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+        }
+
+        // Initialize
+        startTimer();
+    </script>
+</body>
+
+</html>
